@@ -533,6 +533,491 @@
                 padding: 25px;
             }
         }
+
+        /* Slider Section */
+        .slider-section {
+            background-color: #0b0b0b;
+            padding: 100px 5%;
+            text-align: center;
+            border-top: 1px solid #222;
+            border-bottom: 1px solid #222;
+        }
+
+        .slider-container {
+            position: relative;
+            max-width: 1100px;
+            margin: 40px auto 0 auto;
+            overflow: hidden;
+            border-radius: 15px;
+            border: 2px solid #222;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .slider-wrapper {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 300%; /* 3 slides */
+        }
+
+        .slide {
+            width: 33.333%;
+            position: relative;
+            aspect-ratio: 16/9;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .slide-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0) 100%);
+            padding: 40px 60px;
+            text-align: left;
+            z-index: 2;
+        }
+
+        .slide-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .slide-desc {
+            font-size: 15px;
+            color: #ccc;
+            line-height: 1.5;
+            max-width: 700px;
+        }
+
+        /* Slider Controls */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: 0.3s;
+            z-index: 10;
+        }
+
+        .slider-btn:hover {
+            background: var(--primary-pink);
+            border-color: var(--primary-pink);
+            box-shadow: 0 0 15px rgba(227, 83, 175, 0.5);
+        }
+
+        .slider-btn-prev {
+            left: 20px;
+        }
+
+        .slider-btn-next {
+            right: 20px;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #333;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .dot.active {
+            background: var(--primary-pink);
+            width: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(227, 83, 175, 0.5);
+        }
+
+        /* FAQ Accordion Section */
+        .faq-section {
+            background-color: #0f0f0f;
+            padding: 100px 5%;
+            text-align: center;
+            border-top: 1px solid #222;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 40px auto 0 auto;
+            text-align: left;
+        }
+
+        .accordion-item {
+            background: #151515;
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .accordion-item:hover {
+            border-color: rgba(227, 83, 175, 0.5);
+            box-shadow: 0 0 15px rgba(227, 83, 175, 0.1);
+        }
+
+        .accordion-item.active {
+            border-color: var(--primary-pink);
+        }
+
+        .accordion-header {
+            padding: 22px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .accordion-header h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin: 0;
+            transition: color 0.3s;
+        }
+
+        .accordion-item.active .accordion-header h3 {
+            color: var(--primary-pink);
+        }
+
+        .accordion-icon {
+            font-size: 14px;
+            color: #888;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+            color: var(--primary-pink);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .accordion-content-inner {
+            padding: 0 30px 25px 30px;
+            font-size: 14px;
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        /* Parallax CTA Section */
+        .parallax-cta {
+            position: relative;
+            height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            text-align: center;
+            border-top: 1px solid #222;
+            border-bottom: 1px solid #222;
+        }
+
+        .parallax-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 140%; /* Taller to allow parallax translation */
+            background: url('cta_bg.png') no-repeat center center;
+            background-size: cover;
+            z-index: 1;
+            transform: translateY(0);
+            will-change: transform;
+        }
+
+        .cta-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.85) 100%);
+            z-index: 2;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 3;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .cta-content h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .cta-content p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #ccc;
+            margin-bottom: 35px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn-outline {
+            border: 2px solid var(--text-white);
+            padding: 15px 40px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: white;
+            font-weight: 900;
+            font-family: 'Montserrat', sans-serif;
+            display: inline-block;
+            transition: transform 0.2s, background 0.3s, color 0.3s;
+        }
+
+        .cta-btn-outline:hover {
+            transform: scale(1.05);
+            background: white;
+            color: black;
+        }
+
+        /* Beautiful Modern Footer */
+        .footer-section {
+            background-color: #080808;
+            padding: 80px 5% 40px 5%;
+            border-top: 1px solid #111;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1.2fr 1fr;
+            gap: 40px;
+        }
+
+        .footer-col h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
+            color: #fff;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 35px;
+            height: 2px;
+            background-color: var(--primary-pink);
+        }
+
+        .footer-col p {
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            height: 45px;
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            text-decoration: none;
+            color: #aaa;
+            font-size: 14px;
+            transition: color 0.3s, transform 0.3s;
+            display: inline-block;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary-pink);
+            transform: translateX(5px);
+        }
+
+        .footer-contact li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .footer-contact i {
+            color: var(--primary-pink);
+            font-size: 16px;
+        }
+
+        /* Social Icon styling with neon pink hover */
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background-color: #121212;
+            border: 1px solid #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 18px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background-color: var(--primary-pink);
+            border-color: var(--primary-pink);
+            color: #fff;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(227, 83, 175, 0.4);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 60px auto 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid #1a1a1a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-bottom p {
+            font-size: 13px;
+            color: #666;
+            margin: 0;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-bottom-links a {
+            text-decoration: none;
+            color: #666;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--primary-pink);
+        }
+
+        /* Responsiveness for New Sections */
+        @media (max-width: 968px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide-overlay {
+                padding: 20px 30px;
+            }
+            
+            .slide-title {
+                font-size: 20px;
+            }
+            
+            .slide-desc {
+                font-size: 13px;
+            }
+            
+            .slider-btn {
+                width: 38px;
+                height: 38px;
+                font-size: 14px;
+            }
+            
+            .accordion-header {
+                padding: 18px 20px;
+            }
+            
+            .accordion-content-inner {
+                padding: 0 20px 20px 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .cta-btn-outline, .whitelist-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 
@@ -630,6 +1115,50 @@
         </div>
     </section>
 
+    <!-- Slider Section -->
+    <section class="slider-section">
+        <span class="mini-tag">Server Showcase</span>
+        <h2 style="font-family: 'Montserrat', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; margin: 20px 0 10px 0;">EXPLORE THE CITY</h2>
+        <p style="color: #888; max-width: 600px; margin: 0 auto 30px auto; font-size: 15px;">Discover what awaits you inside Ruin Roleplay II. Our custom-built activities provide limitless possibilities.</p>
+        
+        <div class="slider-container">
+            <button class="slider-btn slider-btn-prev" id="prevBtn" aria-label="Previous Slide">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="slider-btn slider-btn-next" id="nextBtn" aria-label="Next Slide">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            
+            <div class="slider-wrapper" id="sliderWrapper">
+                <div class="slide">
+                    <img src="slider_cars.png" alt="Custom Cars & Tuner Shop">
+                    <div class="slide-overlay">
+                        <h3 class="slide-title">Custom Cars & Tuner Shop</h3>
+                        <p class="slide-desc">Explore a wide range of custom, high-performance vehicles and modify them to your liking at local tuner shops. Own the streets with unique designs.</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="slider_heists.png" alt="Premium Heists & Robberies">
+                    <div class="slide-overlay">
+                        <h3 class="slide-title">Premium Heists & Robberies</h3>
+                        <p class="slide-desc">Plan and execute tactical bank robberies, jewelry heists, and store stick-ups with your crew. Evade the law and secure your fortune.</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="slider_police.png" alt="Active Emergency Services">
+                    <div class="slide-overlay">
+                        <h3 class="slide-title">Active Emergency Services</h3>
+                        <p class="slide-desc">Enforce the law or save lives. Join the active LSPD or EMS departments with custom uniforms, cruisers, and realistic dispatcher systems.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slider-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </section>
 
     <section class="pricing-section">
         <div class="pricing-header">
@@ -688,6 +1217,140 @@
             </div>
         </div>
     </section>
+
+    <!-- FAQ Accordion Section -->
+    <section class="faq-section">
+        <span class="mini-tag">Got Questions?</span>
+        <h2 style="font-family: 'Montserrat', sans-serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; margin: 20px 0 10px 0;">FREQUENTLY ASKED QUESTIONS</h2>
+        <p style="color: #888; max-width: 600px; margin: 0 auto 30px auto; font-size: 15px;">Everything you need to know about the server, whitelist application, and roleplay rules.</p>
+
+        <div class="faq-container">
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <h3>How do I join Ruin Roleplay II?</h3>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        To join Ruin Roleplay II, click on the "WHITELIST NOW" button, join our Discord server, and fill out the quick whitelist application form. Once approved, you can connect directly through FiveM.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <h3>What are the server specifications?</h3>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        Our server runs on dedicated high-performance hardware with AMD Ryzen processors, enterprise SSD storage, and top-tier DDoS protection, ensuring a lag-free 60+ FPS experience for all players.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <h3>Is there a roleplay guide for beginners?</h3>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        Yes! We have a complete Server Book available on our Discord server that outlines all rules, basic roleplay terms (like Powergaming, Metagaming, Fail-RP), and tips to help you get started on your journey.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <h3>How can I contact support or report a player?</h3>
+                    <i class="fas fa-chevron-down accordion-icon"></i>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        You can open a support ticket on our Discord server 24/7. Our dedicated staff team is always ready to assist you with player reports, bug submissions, or general inquiries.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parallax CTA Section -->
+    <section class="parallax-cta">
+        <div class="parallax-bg" id="parallaxBg"></div>
+        <div class="cta-overlay"></div>
+        <div class="cta-content">
+            <h2>Are You Ready To Write Your Own Story?</h2>
+            <p>Join the most immersive GTA V Roleplay community today. Choose your path, build your empire, align with law enforcement, or rule the streets. Your destiny is in your hands.</p>
+            <div class="cta-buttons">
+                <a href="#" class="whitelist-btn">WHITELIST NOW</a>
+                <a href="#" class="cta-btn-outline">JOIN DISCORD</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beautiful Modern Footer -->
+    <footer class="footer-section">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="footer-logo">
+                    <img src="logo.webp" alt="Ruin Roleplay Logo">
+                </div>
+                <p>A premium FiveM Roleplay server dedicated to providing the best immersive roleplay experience. Join our community and begin your adventure today.</p>
+                <div class="social-links">
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Server Book</a></li>
+                    <li><a href="#">All Departments</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Premium Plans</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Server Info</h4>
+                <ul class="footer-contact">
+                    <li><i class="fas fa-network-wired"></i> Server IP: play.ruinrp.com</li>
+                    <li><i class="fab fa-discord"></i> Discord: discord.gg/ruinrp</li>
+                    <li><i class="fas fa-envelope"></i> Support: support@ruinrp.com</li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Rules & Regulations</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Refund Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 Ruin Roleplay II. All Rights Reserved. Not affiliated with Rockstar Games or Take-Two Interactive.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+                <a href="#">Cookies</a>
+            </div>
+        </div>
+    </footer>
+
     <script>
         function toggleMenu() {
             const nav = document.getElementById('navLinks');
@@ -700,6 +1363,111 @@
                 document.getElementById('navLinks').classList.remove('active');
             });
         });
+
+        // Image Slider Logic
+        const sliderWrapper = document.getElementById('sliderWrapper');
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+        let sliderInterval;
+
+        function updateSlider() {
+            if (sliderWrapper) {
+                sliderWrapper.style.transform = `translateX(-${currentSlide * (100 / totalSlides)}%)`;
+                dots.forEach((dot, idx) => {
+                    dot.classList.toggle('active', idx === currentSlide);
+                });
+            }
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        }
+
+        if (prevBtn && nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                resetAutoplay();
+            });
+            
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                resetAutoplay();
+            });
+        }
+
+        dots.forEach((dot, idx) => {
+            dot.addEventListener('click', () => {
+                currentSlide = idx;
+                updateSlider();
+                resetAutoplay();
+            });
+        });
+
+        function startAutoplay() {
+            sliderInterval = setInterval(nextSlide, 5000);
+        }
+
+        function resetAutoplay() {
+            clearInterval(sliderInterval);
+            startAutoplay();
+        }
+
+        startAutoplay();
+
+        const sliderContainer = document.querySelector('.slider-container');
+        if (sliderContainer) {
+            sliderContainer.addEventListener('mouseenter', () => clearInterval(sliderInterval));
+            sliderContainer.addEventListener('mouseleave', startAutoplay);
+        }
+
+        // Accordion FAQ Logic
+        const accordionItems = document.querySelectorAll('.accordion-item');
+
+        accordionItems.forEach(item => {
+            const header = item.querySelector('.accordion-header');
+            header.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                // Close all other open accordion items
+                accordionItems.forEach(otherItem => {
+                    otherItem.classList.remove('active');
+                    otherItem.querySelector('.accordion-content').style.maxHeight = null;
+                });
+                
+                if (!isActive) {
+                    item.classList.add('active');
+                    const content = item.querySelector('.accordion-content');
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        });
+
+        // Parallax CTA background scroll effect
+        const parallaxBg = document.getElementById('parallaxBg');
+        const parallaxSection = document.querySelector('.parallax-cta');
+
+        if (parallaxBg && parallaxSection) {
+            window.addEventListener('scroll', () => {
+                const rect = parallaxSection.getBoundingClientRect();
+                const viewHeight = window.innerHeight;
+                
+                if (rect.top < viewHeight && rect.bottom > 0) {
+                    const scrollPercent = (viewHeight - rect.top) / (viewHeight + rect.height);
+                    const translateVal = (scrollPercent - 0.5) * 80;
+                    parallaxBg.style.transform = `translateY(${translateVal}px)`;
+                }
+            });
+        }
     </script>
 </body>
 
