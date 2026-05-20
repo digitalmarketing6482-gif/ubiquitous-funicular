@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruin Roleplay II | FiveM Server</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* CSS Reset & Variables */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-pink: #e353af;
+            --text-white: #ffffff;
+            --nav-bg: rgba(0, 0, 0, 0.2);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000;
+            color: var(--text-white);
+            overflow-x: hidden;
+        }
+
+        /* Hero Background Setup */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)),
+                url('GTAVI_Trailer2_poster.webp') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Navbar */
+        header {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-white);
+            font-size: 14px;
+            font-weight: 500;
+            transition: 0.3s;
+            text-transform: capitalize;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-pink);
+        }
+
+        .dashboard-btn {
+            border: 2px solid var(--text-white);
+            padding: 8px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .dashboard-btn:hover {
+            background: white;
+            color: black;
+        }
+
+        /* Main Content */
+        .content {
+            padding-left: 5%;
+            max-width: 650px;
+        }
+
+        .v-tag {
+            font-size: 14px;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 35px;
+            opacity: 0.9;
+        }
+
+        .whitelist-btn {
+            background-color: var(--primary-pink);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 900;
+            font-family: 'Montserrat', sans-serif;
+            display: inline-block;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .whitelist-btn:hover {
+            transform: scale(1.05);
+            background-color: #c93d94;
+        }
+
+        /* Discord Floating Button */
+        .discord-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .discord-icon-bg {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background: white;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 968px) {
+            .nav-links {
+                position: fixed;
+                right: -100%;
+                top: 0;
+                height: 100vh;
+                width: 70%;
+                background: rgba(0, 0, 0, 0.95);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: 0.4s;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .dashboard-btn {
+                display: none;
+                /* Hide on mobile to keep it clean */
+            }
+        }
+
+        /* Features Section Styles */
+        .features-section {
+            background-color: #0f0f0f;
+            /* Dark background matching the image */
+            padding: 80px 5% 0 5%;
+            position: relative;
+            border-top: 2px solid var(--primary-pink);
+            /* The pink divider line */
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .feature-item {
+            text-align: left;
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .feature-item h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            text-transform: capitalize;
+        }
+
+        .feature-item p {
+            font-size: 14px;
+            color: #cccccc;
+            line-height: 1.4;
+        }
+
+        /* Scroll to Top Side Element */
+        .scroll-side {
+            position: absolute;
+            right: 5%;
+            top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .scroll-side span {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+        }
+
+        .vertical-line {
+            width: 1px;
+            height: 100px;
+            background: #444;
+        }
+
+        /* Outlined Background Text */
+        .outlined-footer {
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 40px 0;
+        }
+
+        .outline-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 100px;
+            font-weight: 900;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+            letter-spacing: 5px;
+            display: block;
+            width: 100%;
+        }
+
+        /* Mobile Tweak */
+        @media (max-width: 768px) {
+            .outline-text {
+                font-size: 40px;
+            }
+
+            .scroll-side {
+                display: none;
+                /* Hide scroll side on small screens */
+            }
+        }
+
+        /* Marquee Styling */
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            background: transparent;
+            padding: 40px 0;
+            position: relative;
+            user-select: none;
+        }
+
+        .marquee-content {
+            display: flex;
+            white-space: nowrap;
+            animation: scroll-marquee 20s linear infinite;
+        }
+
+        .marquee-content span {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 120px;
+            font-weight: 900;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.15);
+            /* Subtle outline */
+            padding-right: 50px;
+            text-transform: uppercase;
+            letter-spacing: 10px;
+        }
+
+        /* The Animation */
+        @keyframes scroll-marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Scroll to top Sidebar Styling */
+        .scroll-to-top {
+            position: absolute;
+            right: 40px;
+            top: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            z-index: 5;
+        }
+
+        .scroll-to-top p {
+            writing-mode: vertical-rl;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #666;
+            margin: 0 0 15px 0;
+            transition: color 0.3s;
+        }
+
+        .scroll-to-top:hover p {
+            color: var(--primary-pink);
+        }
+
+        .scroll-to-top .line {
+            width: 1px;
+            height: 120px;
+            background: linear-gradient(to bottom, #444, transparent);
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .marquee-content span {
+                font-size: 60px;
+            }
+
+            .scroll-to-top {
+                display: none;
+            }
+        }
+
+        /* Pricing Section Styles */
+        .pricing-section {
+            background-color: #0f0f0f;
+            padding: 100px 5%;
+            text-align: center;
+        }
+
+        .pricing-header {
+            margin-bottom: 60px;
+        }
+
+        .mini-tag {
+            border: 1px solid #444;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #ccc;
+        }
+
+        .pricing-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 42px;
+            font-weight: 900;
+            margin-top: 20px;
+            letter-spacing: 1px;
+        }
+
+        .pricing-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .pricing-card {
+            background: #151515;
+            border: 1px solid #333;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .pricing-card.best-seller {
+            border: 2px solid var(--primary-pink);
+        }
+
+        .badge {
+            background: var(--primary-pink);
+            padding: 8px 0;
+            font-weight: bold;
+            font-size: 14px;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .card-inner {
+            padding: 40px;
+            text-align: left;
+        }
+
+        .plan-type {
+            background: #222;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .main-price {
+            font-size: 48px;
+            font-weight: 900;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .duration {
+            color: var(--primary-pink);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .strikethrough {
+            color: #777;
+            font-size: 14px;
+            margin: 10px 0 30px 0;
+        }
+
+        .features-list h4 {
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .features-list ul {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .features-list li {
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #bbb;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features-list i {
+            color: var(--primary-pink);
+        }
+
+        .price-btn {
+            display: block;
+            text-align: center;
+            background: linear-gradient(90deg, #6a5acd, #e353af);
+            /* Gradient matching image */
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            transition: opacity 0.3s;
+        }
+
+        .price-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Mobile Tweak */
+        @media (max-width: 768px) {
+            .pricing-header h2 {
+                font-size: 28px;
+            }
+
+            .card-inner {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="logo.webp" alt="RUIN ROLEPLAY">
+        </div>
+
+        <div class="nav-container">
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Server Book</a></li>
+                <li><a href="#">All Departments</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">More</a></li>
+            </ul>
+            <a href="#" class="dashboard-btn">DASHBOARD</a>
+            <div class="hamburger" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="content">
+            <div class="v-tag">v2.0 is Live</div>
+            <h1>WELCOME TO <br> RUIN ROLEPLAY II SERVER</h1>
+            <p>
+                We are a premium FiveM Roleplay server dedicated to providing the
+                best immersive experience for our community. Whether you are joining
+                from Pakistan, India, or Bangladesh, our server offers low ping,
+                high performance, and a welcoming environment for all roleplayers.
+            </p>
+            <a href="#" class="whitelist-btn">WHITELIST NOW</a>
+        </div>
+    </section>
+
+    <a href="#" class="discord-float">
+        <span>Discord</span>
+        <div class="discord-icon-bg">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE8Z6WVq4uJ11q2-VQ4GTIt5hNy6D2PRZ4LQ&s"
+                width="20" style="filter: invert(1);">
+        </div>
+    </a>
+
+    <section class="features-section">
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Quality Roleplay</h3>
+                <p>Immersive storylines and high-standard interactions.</p>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>Custom Server</h3>
+                <p>Exclusive scripts, premium assets, and optimized performance.</p>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>24/7 Support</h3>
+                <p>Dedicated staff team ready to assist around the clock.</p>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon">
+                    <i class="fas fa-ticket-alt"></i>
+                </div>
+                <h3>Fully Whitelist</h3>
+                <p>Application-only entry to ensure a fail-rp free environment.</p>
+            </div>
+        </div>
+
+        <div class="marquee-container">
+            <div class="marquee-content">
+                <span>SERVER — RUIN ROLEPLAY — AS — SERVER — RUIN ROLEPLAY — AS — </span>
+                <span>SERVER — RUIN ROLEPLAY — AS — SERVER — RUIN ROLEPLAY — AS — </span>
+            </div>
+        </div>
+
+        <div class="scroll-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+            <p>Scroll to top</p>
+            <div class="line"></div>
+        </div>
+    </section>
+
+
+    <section class="pricing-section">
+        <div class="pricing-header">
+            <span class="mini-tag">Whitelist Now</span>
+            <h2>Whitelist Is Free For Limited Time</h2>
+        </div>
+
+        <div class="pricing-grid">
+            <div class="pricing-card best-seller">
+                <div class="badge">Best Seller</div>
+                <div class="card-inner">
+                    <div class="plan-type">Limited Time Free</div>
+                    <div class="price-box">
+                        <span class="main-price">Free</span>
+                        <span class="duration">/month Now</span>
+                    </div>
+                    <p class="strikethrough">After Ending Offer €1.99</p>
+
+                    <div class="features-list">
+                        <h4>Whitelist Features</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Full Roleplay Experience</li>
+                            <li><i class="fas fa-check-circle"></i> Whitelist</li>
+                            <li><i class="fas fa-check-circle"></i> Normal Support</li>
+                            <li><i class="fas fa-check-circle"></i> Basic Startup Money ($5000)</li>
+                            <li><i class="fas fa-check-circle"></i> Basic Startup Bike (To Travel in Server)</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="price-btn">WHITELIST NOW</a>
+                </div>
+            </div>
+
+            <div class="pricing-card">
+                <div class="card-inner">
+                    <div class="plan-type">Premium Package</div>
+                    <div class="price-box">
+                        <span class="main-price">€3.99</span>
+                        <span class="duration">/lifetime Now</span>
+                    </div>
+                    <p class="strikethrough">After Ending Offer €9.99/month</p>
+
+                    <div class="features-list">
+                        <h4>Whitelist Premium Features</h4>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Full Roleplay Experience</li>
+                            <li><i class="fas fa-check-circle"></i> Premium Whitelist</li>
+                            <li><i class="fas fa-check-circle"></i> Priority Support</li>
+                            <li><i class="fas fa-check-circle"></i> Basic Priority Queue</li>
+                            <li><i class="fas fa-check-circle"></i> Advance Startup Money ($15000)</li>
+                            <li><i class="fas fa-check-circle"></i> Advance Startup Car (To Travel in Server)</li>
+                            <li><i class="fas fa-check-circle"></i> Everything Included in Basic Package</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="price-btn">PREMIUM WHITELIST NOW</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            nav.classList.toggle('active');
+        }
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
